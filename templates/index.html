@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Review Sentiment Predictor</title>
+  <style>
+    * { font-weight: bold; }
+    body { 
+      font-family: Arial, sans-serif; 
+      background: #e6e6e6; /* light grey */ 
+      padding: 2rem; 
+      margin: 0;
+      color: #f0f0f0;
+    }
+    .container { 
+      max-width: 600px; 
+      margin: auto; 
+      background: #2f2f2f; /* dark grey content */ 
+      padding: 2rem; 
+      border-radius: 10px; 
+      box-shadow: 0 12px 28px rgba(0,0,0,0.25); 
+      color: #f0f0f0;
+    }
+    h1 { margin-top: 0; }
+    label { display: block; margin: .6rem 0 .2rem; }
+    textarea, input { 
+      width: 100%; 
+      padding: .75rem; 
+      border: 1px solid #555; 
+      border-radius: 6px; 
+      box-sizing: border-box; 
+      background: #1f1f1f; 
+      color: #fff;
+    }
+    textarea:focus, input:focus { outline: 2px solid #6b8cff; }
+    button { 
+      background: #4f9fff; 
+      color: white; 
+      border: none; 
+      padding: .75rem 1.2rem; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      font-size: 1rem; 
+      margin-top: 1rem; 
+    }
+    .result { 
+      margin-top: 1.5rem; 
+      padding: 1rem 1.25rem; 
+      border-radius: 8px; 
+      background: #000; /* black box */ 
+      color: #fff;
+    }
+    .positive { color: #4ade80; } /* greenish */
+    .negative { color: #f87171; } /* reddish */
+    .small { font-size: 0.85rem; color: #ccc; }
+    a { color: #8ab4f8; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Review Sentiment</h1>
+    <p>Enter a product/service review. Logistic Regression will classify it as <strong>positive</strong> or <strong>negative</strong>.</p>
+    <form method="post" action="/predict">
+      <label for="review_text">Review Text</label>
+      <textarea id="review_text" name="review_text" rows="4" required>{{ review_text }}</textarea>
+
+      <label for="star_rating">Star Rating (1–5, optional)</label>
+      <input type="number" id="star_rating" name="star_rating" min="1" max="5" value="{{ star_rating or 3 }}" />
+
+      <button type="submit">Predict</button>
+    </form>
+
+    {% if result %}
+      <div class="result">
+        <p>Predicted sentiment: 
+          {% if result.sentiment == 1 %}
+            <span class="positive">Positive</span>
+          {% else %}
+            <span class="negative">Negative</span>
+          {% endif %}
+        </p>
+        <p>Probability (positive): {{ "{:.1%}".format(result.proba) }}</p>
+        <p class="small">Review length: {{ result.review_len }} words</p>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
+

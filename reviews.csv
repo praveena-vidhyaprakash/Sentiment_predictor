@@ -1,0 +1,21 @@
+review_text,star_rating,sentiment
+"Excellent product, loved it!",5,1
+Very satisfied with the service.,5,1
+Amazing quality and fast delivery.,5,1
+"Best purchase ever, highly recommend!",5,1
+"Works perfectly, I am happy.",4,1
+Good product for the price.,4,1
+"Decent quality, would buy again.",4,1
+Nice packaging and timely delivery.,5,1
+"Exactly as described, great value.",5,1
+User friendly and reliable.,4,1
+"Terrible experience, broke immediately.",1,0
+Not worth the money.,1,0
+"Very disappointed, poor quality.",1,0
+"Worst service, will not buy again.",1,0
+It stopped working after one day.,1,0
+Cheap material and bad build.,2,0
+"Misleading description, not satisfied.",2,0
+Customer support was unhelpful.,2,0
+Defective item received.,1,0
+Product did not meet expectations.,2,0
